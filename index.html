@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello</title>
+	<!--- Load jquery, bootstrap, and firebasse -->
+
+	<script
+  	src="https://code.jquery.com/jquery-3.4.1.min.js"
+  	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  	crossorigin="anonymous"></script>
+
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+
+	
+</head>
+<body>
+	<!-- HMTL Forms -->
+	<h3>Login</h3>
+	<div class="container" id="login-form">
+		<div class="card">
+		<form class="card-body">
+		  <div class="form-group">
+		    <label for="inputEmail">Email address</label>
+		    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+		    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputPassword">Password</label>
+		    <input type="password" class="form-control" id="inputPassword">
+		  </div>
+		  <button id="sign-in-button" type="button" class="btn btn-primary btn-block">Sign In</button>
+		  <button id="create-new-user-button" type="button" class="btn btn-warning btn-block">Create new user</button><button id="google-login-button" type="button" class="btn btn-primary btn-block">Login with google</button>
+		</form>
+		</div>
+	</div>
+	<hr>
+	<div class="container" id="logout-form">
+		<button id="logout-button" type="button" class="btn btn-primary btn-block">Logout</button>
+	</div>
+	<hr>
+
+	<div class="container" id="show-heroes">
+		<h3>Here are all heroes in the database</h3>
+	</div>
+
+	<br><br>
+
+	<!-- Add hero Forms -->
+	<h3>Create a hero</h3>
+	<div class="container" id="hero-form">
+		<div class="card">
+		<form class="card-body">
+		  <div class="form-group">
+		    <label for="inputHeroName">Hero name</label>
+		    <input type="text" class="form-control" id="inputHeroName" placeholder="Hero Name">
+		  </div>
+		  <div class="form-group">
+		  	<label for="hero-race">Choose a type:</label>
+
+				<select id="hero-race" class="form-control">
+				  <option value="Human">Human</option>
+				  <option value="Wizard">Wizard</option>
+				  <option value="God">God</option>
+				  <option value="Org">Org</option>
+				</select>
+		  </div>
+		  <div class="form-group">
+		  	<label for="hero-profession">Choose a profession:</label>
+
+				<select id="hero-profession" class="form-control">
+				  <option value="Amrourer">Amrourer</option>
+				  <option value="Cobbler">Cobbler</option>
+				  <option value="Nerd">Nerd</option>
+				  <option value="Slave">Slave</option>
+				</select>
+		  </div>
+		  <div class="form-group">
+		  	<label for="hero-strength">Choose strength: <span class="attrib-value" >50</span></label> <br>
+		  		<input class="form-control hero-sss" type="range" name="hero-strength" id="hero-strength" value="50" min="0" max="100" >
+		  </div>
+		  <div class="form-group">
+		  	<label for="hero-speed">Choose speed: <span class="attrib-value" >50</span></label> <br>
+		  		<input class="form-control hero-sss" type="range" name="hero-speed" id="hero-speed" value="50" min="0" max="100" >
+		  </div>
+		  <div class="form-group">
+		  	<label for="hero-stamina">Choose stamina: <span class="attrib-value" >50</span></label> <br>
+		  		<input class="form-control hero-sss" type="range" name="hero-stamina" id="hero-stamina" value="50" min="0" max="100" >
+		  </div>
+		  <div class="checkbox">
+		  	<label>
+		  		<input type="checkbox" id="is-diety" >Is diety?
+		  	</label>
+		  </div>
+		  <button id="create-newhero-button" type="button" class="btn btn-primary btn-block container">Create new Hero</button>
+
+
+		</form>
+		</div>
+	</div>
+
+
+
+
+
+
+	<!-- Scripts -->
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+	     https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyDElydhWjy66ADo2ao3wJMXDBrBhrBQP-s",
+	    authDomain: "fir-web-learn-54bef.firebaseapp.com",
+	    databaseURL: "https://fir-web-learn-54bef.firebaseio.com",
+	    projectId: "fir-web-learn-54bef",
+	    storageBucket: "fir-web-learn-54bef.appspot.com",
+	    messagingSenderId: "320852983130",
+	    appId: "1:320852983130:web:3c64465a949c3fa81cc763",
+	    measurementId: "G-43PVRH6M4W"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.analytics();
+	</script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+</body>
+
+
+
+	<script type="text/javascript">
+		var currentUser={};
+		var database = firebase.database();
+
+		// button listeners
+		$("#sign-in-button").click(function(){
+			var email=$("#inputEmail").val();
+			var password=$("#inputPassword").val();
+			console.log("Existing user : "+email+"and :"+password);
+			signIn(email,password);
+		});
+
+		$("#google-login-button").click(function(){
+			console.log("CLicked google login");
+
+			var provider = new firebase.auth.GoogleAuthProvider();
+
+			firebase.auth().signInWithPopup(provider).then(function(result) {
+  // This gives you a Google Access Token. You can use it to access the Google API.
+			  var token = result.credential.accessToken;
+			  // The signed-in user info.
+			  currentUser = result.user;
+			  console.log("logged in");
+			  console.log(currentUser);
+			  // ...
+			}).catch(function(error) {
+			  // Handle Errors here.
+			  var errorMessage = error.message;
+			  console.log(errorMessage);
+			  // ...
+			});
+		});
+
+		$("#create-new-user-button").click(function(){
+			var email=$("#inputEmail").val();
+			var password=$("#inputPassword").val();
+			console.log("New user : "+email+"and :"+password);
+			createNewUser(email,password);
+		});
+
+		$("#logout-button").click(function(){
+			firebase.auth().signOut();
+			console.log("logged out");
+
+			$("#login-form").show();
+			$("#hero-form").hide();
+
+		});
+
+		$("#create-newhero-button").click(function(){
+			var hero ={
+				id: $("#inputHeroName").val() + Date.now(),
+				owner: currentUser.uid,
+				name:$("#inputHeroName").val(),
+				race:$("#hero-race :selected").val() ,
+				profession:$("#hero-profession :selected").val() ,
+				strength:$("#hero-strength").val() ,
+				speed:$("#hero-speed").val() ,
+				stamina:$("#hero-stamina").val() ,
+				diety:$("#is-diety").prop("checked")
+			}
+			createNewHero(hero);
+		});
+
+		$(document).on("click",".delete-hero", function(){
+			var heroId=$(this).attr("id");
+			firebase.database().ref("heroes/"+heroId).remove();
+			firebase.database().ref('Users/'+currentUser.uid+ '/heroes/' + heroId).remove();
+		});
+
+
+		$(".hero-sss").on("change input", function(){
+			var currentValue = $(this).val();
+			$(this).parent().find("span").text(currentValue);
+		});
+
+
+
+		function createNewUser(email, password) {
+			firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+			  // Handle Errors here.
+			  var errorCode = error.code;
+			  var errorMessage = error.message;
+			  console.log(errorMessage)
+			  // ...
+			});
+		}
+
+		function signIn(email, password){
+			firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+				// Handle Errors here.
+				var errorCode = error.code;
+				var errorMessage = error.message;
+			 	console.log(errorMessage)
+			 	alert(errorMessage);
+
+				  // ...
+			});
+		}
+
+		function writeUserData(user){
+			firebase.database().ref('Users/' + user.uid).set({
+		    email: user.email
+		  });
+		}
+
+
+		function createNewHero(h){
+			firebase.database().ref('heroes/' + h.id).set(h);
+			console.log("blah");
+			firebase.database().ref('Users/'+currentUser.uid+ '/heroes/' + h.id).set(h);
+		}
+
+
+
+		var heroReference = firebase.database().ref('heroes');
+			heroReference.on('value',function(snapshot){
+				$("#show-heroes").empty();
+				var heroHTML = "<h3> Here are all the heroes in the database</h3>";
+				snapshot.forEach(function(childsnapshot){
+					var person=childsnapshot.val();
+					heroHTML += "<div class='hero-html' > <hr> <ul>";
+					heroHTML +="<li>Name: <span>"+person.name+"</span></li>";
+					heroHTML +="<li>Race: <span>"+person.race+"</span></li>";
+					heroHTML +="<li>profession: <span>"+person.profession+"</span></li>";
+					heroHTML +="<li>strength: <span>"+person.strength+"</span></li>";
+					heroHTML +="<li>speed: <span>"+person.speed+"</span></li>";
+					heroHTML +="<li>stamina: <span>"+person.stamina+"</span></li>";
+					heroHTML +="<li>diety: <span>"+person.diety+"</span></li>";
+					heroHTML += "<button type='button' class='btn btn-danger delete-hero' id='"+person.id+"'>Delete ME</button>";
+					heroHTML += "</ul></div>";
+
+				});
+				$("#show-heroes").html(heroHTML);
+		});
+
+		firebase.auth().onAuthStateChanged(function(user) {
+			  if (user) {
+			    // User is signed in.
+			    var email = user.email;
+			    currentUser = user;
+			    // writeUserData(currentUser);
+			    console.log("Current user: "+currentUser.email+"has logged in");
+
+			    $("#login-form").hide();
+			    $("#hero-form").show();
+
+			    // ...
+			  } else {
+			    // User is signed out.
+			    // ...
+			  }
+			});
+
+
+
+
+	</script>
+
+</body>
+</html>
